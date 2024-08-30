@@ -7,38 +7,37 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.HashMap;
 import java.util.Map;
 
 @SpringBootApplication
 @RestController
 public class StudentManagementApplication {
 
-    private String name = "Enami Kouji";
+      private String name = "Enami Kouji";
     private String age = "37";
-    private Map<String, String> student;
+    private Map<String, String> student = new HashMap<>();
 
     public static void main(String[] args) {
         SpringApplication.run(StudentManagementApplication.class, args);
     }
 
-    @GetMapping("/studentInfo")
-    public String getStudentInfo() {
-        return name + " " + age + "歳";
+    @GetMapping("/students")
+    public Map<String, String> getStudent() {
+        return student;
     }
 
-
-    @PostMapping("/studentInfo")
-    public void setStudentInfo(String name, String age) {
-        this.name = name;
-        this.age = age;
-
+    @PostMapping("/students")
+    public void setStudent(String name, String age) {
+        student.put("name", name);
+        student.put("age", age);
 
 
     }
 
     @PostMapping("/studentName")
     public void updateStudentName(String name) {
-        this.name = name;
+        student.put("name", name);
     }
 
 
