@@ -13,8 +13,7 @@ import java.util.Map;
 @SpringBootApplication
 @RestController
 public class StudentManagementApplication {
-
-      private String name = "Enami Kouji";
+    private String name = "Enami Kouji";
     private String age = "37";
     private Map<String, String> student = new HashMap<>();
 
