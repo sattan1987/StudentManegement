@@ -1,44 +1,46 @@
 package raisetech.StudentManagement;
 
-import ch.qos.logback.core.util.StringUtil;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
-import java.util.HashMap;
-import java.util.Map;
 
 @SpringBootApplication
 @RestController
 public class StudentManagementApplication {
-    private String name = "Enami Kouji";
-    private String age = "37";
-    private Map<String, String> student = new HashMap<>();
+
+    @Autowired
+    private StudentRepository repository;
+
+
+
 
     public static void main(String[] args) {
         SpringApplication.run(StudentManagementApplication.class, args);
     }
 
-    @GetMapping("/students")
-    public Map<String, String> getStudent() {
-        return student;
-    }
-
-    @PostMapping("/students")
-    public void setStudent(String name, String age) {
-        student.put("name", name);
-        student.put("age", age);
-
-
-    }
-
-    @PostMapping("/studentName")
-    public void updateStudentName(String name) {
-        student.put("name", name);
+    @GetMapping("/student")
+    public String getStudent(@RequestParam String name) {
+        Student student = repository.searchByName(name);
+        return student.getName() + " " + student.getAge() + "歳";
     }
 
 
+    @PostMapping("/student")
+    public void registerStudent(String name, int age) {
+     repository.registerStudent(name,age);
+    }
+
+    @PatchMapping ("/student")
+    public void updateStudent(String name, int age) {
+repository.updateStudent(name,age);
+    }
+    @DeleteMapping("/student")
+public void deleteStudent(String name){
+repository.deleteStudent(name);
+    }
 }
+
 
