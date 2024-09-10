@@ -5,6 +5,16 @@ public class Student {
     private String name;
     private int age;
 
+    public String getGender() {
+        return gender;
+    }
+
+    public void setGender(String gender) {
+        this.gender = gender;
+    }
+
+    private String gender;
+
     public int getAge() {
         return age;
     }
