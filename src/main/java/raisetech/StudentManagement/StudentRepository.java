@@ -19,6 +19,6 @@ public interface StudentRepository {
     @Delete("DELETE FROM student WHERE name = #{name}")
     void deleteStudent(String name);
 
-    @Select("SELECT*FROM student")
+    @Select("SELECT * FROM student")
     List<Student> findAll();
 }
