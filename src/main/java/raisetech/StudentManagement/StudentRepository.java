@@ -11,5 +11,5 @@ public interface StudentRepository {
     List<Student> search();
 
 
-    @Select("SELECT * FROM Students_courses")
-    List<Students_courses> searchCourses();}
+    @Select("SELECT * FROM StudentsCourses")
+    List<StudentsCourses> searchCourses();}

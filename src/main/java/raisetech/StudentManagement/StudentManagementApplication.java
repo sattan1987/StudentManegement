@@ -27,6 +27,6 @@ public class StudentManagementApplication {
     }
 
     @GetMapping("students_coursesList")
-    public List<Students_courses> gerStudent_coursesList(){
+    public List<StudentsCourses> gerStudent_coursesList(){
         return repository.searchCourses();};
     }
