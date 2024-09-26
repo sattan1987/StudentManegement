@@ -7,18 +7,9 @@ import java.util.List;
 @Mapper
 public interface StudentRepository {
 
-    @Select("SELECT * FROM student WHERE name = #{name}")
-    Student searchByName(String name);
+    @Select("SELECT * FROM students")
+    List<Student> search();
 
-    @Insert("INSERT  INTO student(name,age,gender) VALUES(#{name} ,#{age},#{gender})")
-    void registerStudent(String name, int age, String gender);
 
-    @Update("UPDATE student SET age = #{age} , gender = #{gender} WHERE name =#{name}")
-    void updateStudent(String name, int age, String gender);
-
-    @Delete("DELETE FROM student WHERE name = #{name}")
-    void deleteStudent(String name);
-
-    @Select("SELECT * FROM student")
-    List<Student> findAll();
-}
+    @Select("SELECT * FROM Students_courses")
+    List<Students_courses> searchCourses();}

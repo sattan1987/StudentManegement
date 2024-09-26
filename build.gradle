@@ -11,7 +11,15 @@ version = '0.0.1-SNAPSHOT'
 java {
     toolchain {
         languageVersion = JavaLanguageVersion.of(21)
+
     }
+
+    configurations {
+        compilOnly {
+            extendsFrom annotationProcessor
+        }
+    }
+
 }
 
 repositories {
@@ -22,6 +30,10 @@ dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-web'
 //便利機能
     implementation 'org.apache.commons:commons-lang3:3.16.0'
+    //Lombok
+    compileOnly'org.projectlombok:lombok'
+    annotationProcessor'org.projectlombok:lombok'
+
     providedRuntime 'org.springframework.boot:spring-boot-starter-tomcat'
     //MySQLドライバ
     runtimeOnly 'com.mysql:mysql-connector-j'
