@@ -7,7 +7,6 @@ import raisetech.StudentManagement.data.StudentsCourses;
 import java.util.List;
 
 
-
 @Mapper
 public interface StudentRepository {
 
@@ -17,4 +16,5 @@ public interface StudentRepository {
 
 
     @Select("SELECT * FROM Students_Courses")
-    List<StudentsCourses> searchCourses();}
+    List<StudentsCourses> searchCourses();
+}
