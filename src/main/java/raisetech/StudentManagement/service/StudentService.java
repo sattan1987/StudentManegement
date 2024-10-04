@@ -37,10 +37,11 @@ public class StudentService {
     }
 
     public List<StudentsCourses>
-searchJavaCourseInfo() {
-    return repository.searchCourses().stream()
-            .filter(course -> course.getCourse().equals("Javaコース"))
-            .collect(Collectors.toList());
-}}
+    searchJavaCourseInfo() {
+        return repository.searchCourses().stream()
+                .filter(course -> course.getCourse().equals("Javaコース"))
+                .collect(Collectors.toList());
+    }
+}
 
 
