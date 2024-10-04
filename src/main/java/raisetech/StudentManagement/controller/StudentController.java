@@ -31,8 +31,6 @@ public class StudentController {
     @GetMapping("students30s")
     public List<Student> getStudentsIn30s() {
         return service.searchStudentsInTheir30s();
-
-
     }
 
     @GetMapping("/studentsJavaCourseInfo")
