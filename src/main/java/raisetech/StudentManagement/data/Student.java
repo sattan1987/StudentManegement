@@ -1,9 +1,7 @@
-package raisetech.StudentManagement;
+package raisetech.StudentManagement.data;
 
 import lombok.Getter;
 import lombok.Setter;
-
-import java.sql.Timestamp;
 
 @Getter
 @Setter
@@ -18,6 +16,9 @@ public class Student {
     private String emailAddress;
     private String address;
     private int age;
-    private String gender;}
+    private String gender;
+    private String remark;
+    private boolean isDeleted;
+}
 
 
