@@ -21,8 +21,7 @@ public class StudentManagementApplication {
 
         SpringApplication.run(StudentManagementApplication.class, args);
     }
-
-
+    
     @GetMapping("/studentList")
     public List<Student> getstudentlist() {
         return repository.search();
