@@ -22,9 +22,7 @@ public class StudentManagementApplication {
         SpringApplication.run(StudentManagementApplication.class, args);
     }
 
-<<<<<<< HEAD
-}
-=======
+
     @GetMapping("/studentList")
     public List<Student> getstudentlist() {
         return repository.search();
@@ -34,4 +32,4 @@ public class StudentManagementApplication {
     public List<StudentsCourses> gerStudent_coursesList(){
         return repository.searchCourses();};
     }
->>>>>>> main
+
