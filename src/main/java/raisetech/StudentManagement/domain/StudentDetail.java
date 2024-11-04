@@ -6,6 +6,7 @@ import raisetech.StudentManagement.data.Student;
 import raisetech.StudentManagement.data.StudentsCourses;
 
 import java.util.List;
+
 @Getter
 @Setter
 public class StudentDetail {
