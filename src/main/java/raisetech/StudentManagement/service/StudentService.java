@@ -6,6 +6,7 @@ import org.springframework.stereotype.Service;
 import raisetech.StudentManagement.Repository.StudentRepository;
 import raisetech.StudentManagement.data.Student;
 import raisetech.StudentManagement.data.StudentsCourses;
+import raisetech.StudentManagement.domain.StudentDetail;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -29,18 +30,25 @@ public class StudentService {
 
     }
 
-    public List<Student> searchStudentsInTheir30s() {
-        return repository.search().stream()
-                .filter(student -> student.getAge() >= 30 && student.getAge() <= 39)
-                .collect(Collectors.toList());
+    public void saveStudent(Student student) {
 
-    }
 
-    public List<StudentsCourses>searchJavaCourseInfo() {
-        return repository.searchCourses().stream()
-                .filter(course -> course.getCourse().equals("Javaコース"))
-                .collect(Collectors.toList());
+        repository.save(student); // リポジトリを使って保存
     }
 }
+
+
+//    public List<Student> searchStudentsInTheir30s() {
+//        return repository.search().stream()
+//                .filter(student -> student.getAge() >= 30 && student.getAge() <= 39)
+//                .collect(Collectors.toList());
+//
+//    }
+//
+//    public List<StudentsCourses>searchJavaCourseInfo() {
+//        return repository.searchCourses().stream()
+//                .filter(course -> course.getCourse().equals("Javaコース"))
+//                .collect(Collectors.toList());
+//    }
 
 

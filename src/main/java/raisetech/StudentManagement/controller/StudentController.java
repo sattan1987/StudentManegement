@@ -5,12 +5,17 @@ package raisetech.StudentManagement.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
 import raisetech.StudentManagement.controller.converter.StudentConverter;
 import raisetech.StudentManagement.data.Student;
 import raisetech.StudentManagement.data.StudentsCourses;
+import raisetech.StudentManagement.domain.StudentDetail;
 import raisetech.StudentManagement.service.StudentService;
 
+import javax.naming.Binding;
 import java.util.List;
 
 @Controller
@@ -34,19 +39,35 @@ public class StudentController {
         return "studentList";
     }
 
-
-    @GetMapping("studentsCoursesList")
-    public List<StudentsCourses> getStudentCoursesList() {
-        return service.searchStudentCoursesList();
+    @GetMapping("/newStudent")
+    public String newStudent(Model model) {
+        model.addAttribute("studentDetail", new StudentDetail());
+        return "registerStudent";
     }
 
-    @GetMapping("students30s")
-    public List<Student> getStudentsIn30s() {
-        return service.searchStudentsInTheir30s();
+    @PostMapping("/registerStudent")
+    public String registerStudent(@ModelAttribute StudentDetail studentDetail, BindingResult result) {
+        if (result.hasErrors()) {
+            return "registerStudent";
+        }
+        service.saveStudent(studentDetail.getStudent());
+        return "redirect:/studentList";
     }
 
-    @GetMapping("/studentsJavaCourseInfo")
-    public List<StudentsCourses> getJavaCourseInfo() {
-        return service.searchJavaCourseInfo();
-    }
 }
+
+//    @GetMapping("studentsCoursesList")
+//    public List<StudentsCourses> getStudentCoursesList() {
+//        return service.searchStudentCoursesList();
+//    }
+//
+//    @GetMapping("students30s")
+//    public List<Student> getStudentsIn30s() {
+//        return service.searchStudentsInTheir30s();
+//    }
+//
+//    @GetMapping("/studentsJavaCourseInfo")
+//    public List<StudentsCourses> getJavaCourseInfo() {
+//        return service.searchJavaCourseInfo();
+//    }
+

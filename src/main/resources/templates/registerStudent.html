@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+
+    <title>受講生登録</title>
+    <style>
+        .form-group {
+            display: flex;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+        .form-group label {
+            width: 120px; /* ラベルの固定幅 */
+            margin-right: 10px;
+            text-align: left; /* ラベルを右揃え */
+        }
+        .form-group input, .form-group select {
+            width: 200px; /* 入力ボックスの固定幅 */
+            padding: 5px;
+        } .form-group textarea {
+            width: 200px; /* 備考欄の幅を大きくする */
+            height: 50px; /* 高さを設定 */
+        }
+    </style>
+</head>
+<body>
+<h1>受講生登録</h1>
+<form th:action="@{/registerStudent}" th:object="${studentDetail}" method="post">
+    <div class="form-group">
+        <label for="name">名前</label>
+        <input type="text" id="name" th:field="*{student.name}" required/>
+    </div>
+    <div class="form-group">
+        <label for="furigana">フリガナ</label>
+        <input type="text" id="furigana" th:field="*{student.furigana}"/>
+    </div>
+     <div class="form-group">
+        <label for="nickName">ニックネーム</label>
+        <input type="text" id="nickName" th:field="*{student.nickName}"/>
+    </div>
+    <div class="form-group">
+        <label for="emailAddress">メールアドレス</label>
+        <input type="text" id="emailAddress" th:field="*{student.emailAddress}" required/>
+    </div>
+    <div class="form-group">
+        <label for="address">住所</label>
+        <input type="text" id="address" th:field="*{student.address}" required/>
+    </div>
+
+    <div class="form-group">
+        <label for="age">年齢</label>
+        <input type="number" id="age" th:field="*{student.age}"/>
+    </div>
+
+    <div class="form-group">
+        <label for="gender">性別</label>
+        <select id="gender" th:field="*{student.gender}">
+            <option value="男性">男性</option>
+            <option value="女性">女性</option>
+            <option value="その他">その他</option>
+        </select>
+    </div>
+
+    <div class="form-group">
+        <label for="remark">備考</label>
+        <textarea type="text" id="remark" th:field="*{student.remark}">
+        </textarea>
+    </div>
+
+
+    <div>
+        <button type="submit">登録</button>
+    </div>
+</form>
+</body>
+</html>
