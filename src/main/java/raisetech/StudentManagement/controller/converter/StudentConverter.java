@@ -24,7 +24,8 @@ public class StudentConverter {
 
             studentDetail.setStudentsCourses(convertStudentCourses);
             studentDetails.add(studentDetail);
-        });
+        }
+        );
         return studentDetails;
     }
 }
