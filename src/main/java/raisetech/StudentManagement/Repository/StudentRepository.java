@@ -22,5 +22,10 @@ public interface StudentRepository {
     @Insert("INSERT INTO students (name, furigana,nick_name, email_address, address, age, gender, remark) " +
             "VALUES (#{name}, #{furigana}, #{nickName}, #{emailAddress}, #{address}, #{age}, #{gender}, #{remark})")
     @Options(useGeneratedKeys = true, keyProperty = "id")
-    void save(Student student);
+    void saveStudent(Student student);
+
+    @Insert("INSERT INTO students_courses (student_id, course, enrollment_start_date, enrollment_end_date) " +
+            "VALUES (#{studentId}, #{course}, #{enrollmentStartDate}, #{enrollmentEndDate})")
+    @Options(useGeneratedKeys = true, keyProperty = "id")
+    void saveStudentCourses(StudentsCourses studentsCourses);
 }

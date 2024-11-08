@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <title>受講生更新</title>
+  <style>
+    .form-group {
+      display: flex;
+      align-items: center;
+      margin-bottom: 10px;
+    }
+    .form-group label {
+      width: 120px;
+      margin-right: 10px;
+      text-align: left;
+    }
+    .form-group input, .form-group select, .form-group textarea {
+      width: 200px;
+      padding: 5px;
+    }
+    .form-group textarea {
+      height: 50px;
+    }
+  </style>
+</head>
+<body>
+<h1>受講生情報の更新</h1>
+<form th:action="@{/updateStudent/{id}(id=${studentDetail.student.id})}" th:object="${studentDetail}" method="post">
+  <!-- Hidden field to hold the student ID -->
+  <input type="hidden" th:field="*{student.id}" />
+
+  <div class="form-group">
+    <label for="name">名前</label>
+    <input type="text" id="name" th:field="*{student.name}" required />
+  </div>
+
+  <div class="form-group">
+    <label for="furigana">フリガナ</label>
+    <input type="text" id="furigana" th:field="*{student.furigana}" required />
+  </div>
+
+  <div class="form-group">
+    <label for="nickName">ニックネーム</label>
+    <input type="text" id="nickName" th:field="*{student.nickName}" />
+  </div>
+
+  <div class="form-group">
+    <label for="emailAddress">メールアドレス</label>
+    <input type="email" id="emailAddress" th:field="*{student.emailAddress}" required />
+  </div>
+
+  <div class="form-group">
+    <label for="address">住所</label>
+    <input type="text" id="address" th:field="*{student.address}" required />
+  </div>
+
+  <div class="form-group">
+    <label for="age">年齢</label>
+    <input type="number" id="age" th:field="*{student.age}" />
+  </div>
+
+  <div class="form-group">
+    <label for="gender">性別</label>
+    <select id="gender" th:field="*{student.gender}">
+      <option value="男性">男性</option>
+      <option value="女性">女性</option>
+      <option value="その他">その他</option>
+    </select>
+  </div>
+
+  <div class="form-group">
+    <label for="remark">備考</label>
+    <textarea id="remark" th:field="*{student.remark}"></textarea>
+  </div>
+
+  <div>
+    <button type="submit">更新</button>
+  </div>
+</form>
+</body>
+</html>

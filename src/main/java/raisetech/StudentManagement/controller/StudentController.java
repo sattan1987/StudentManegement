@@ -8,6 +8,7 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import raisetech.StudentManagement.controller.converter.StudentConverter;
 import raisetech.StudentManagement.data.Student;
@@ -16,6 +17,7 @@ import raisetech.StudentManagement.domain.StudentDetail;
 import raisetech.StudentManagement.service.StudentService;
 
 import javax.naming.Binding;
+import java.util.Arrays;
 import java.util.List;
 
 @Controller
@@ -41,7 +43,9 @@ public class StudentController {
 
     @GetMapping("/newStudent")
     public String newStudent(Model model) {
-        model.addAttribute("studentDetail", new StudentDetail());
+        StudentDetail studentDetail = new StudentDetail();
+        studentDetail.setStudentsCourses(Arrays.asList(new StudentsCourses()));
+        model.addAttribute("studentDetail",studentDetail);
         return "registerStudent";
     }
 
@@ -50,9 +54,10 @@ public class StudentController {
         if (result.hasErrors()) {
             return "registerStudent";
         }
-        service.saveStudent(studentDetail.getStudent());
+        service.saveStudent(studentDetail);
         return "redirect:/studentList";
     }
+
 
 }
 

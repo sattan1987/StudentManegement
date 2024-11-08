@@ -3,11 +3,13 @@ package raisetech.StudentManagement.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import raisetech.StudentManagement.Repository.StudentRepository;
 import raisetech.StudentManagement.data.Student;
 import raisetech.StudentManagement.data.StudentsCourses;
 import raisetech.StudentManagement.domain.StudentDetail;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -30,12 +32,21 @@ public class StudentService {
 
     }
 
-    public void saveStudent(Student student) {
+    @Transactional
+    public void saveStudent(StudentDetail studentDetail) {
+        repository.saveStudent(studentDetail.getStudent()); // リポジトリを使って保存
+        for (StudentsCourses studentsCourses : studentDetail.getStudentsCourses()) {
+            studentsCourses.setStudentId(studentDetail.getStudent().getId());
+            studentsCourses.setEnrollmentStartDate(LocalDateTime.now());
+            studentsCourses.setEnrollmentEndDate(LocalDateTime.now().plusYears(1));
+            repository.saveStudentCourses(studentsCourses);
 
-
-        repository.save(student); // リポジトリを使って保存
+        }
     }
-}
+
+    }
+
+
 
 
 //    public List<Student> searchStudentsInTheir30s() {
