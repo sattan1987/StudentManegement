@@ -66,6 +66,10 @@
         <textarea type="text" id="remark" th:field="*{student.remark}">
         </textarea>
     </div>
+    <div th:each="course, stat : *{studentsCourses}" class="form-group">
+        <label for="course" th:for="*{studentsCourses[__${stat.index}__].course}">受講コース名</label>
+        <input type="text" id="course" th:field="*{studentsCourses[__${stat.index}__].course}"/>
+    </div>
 
 
     <div>
