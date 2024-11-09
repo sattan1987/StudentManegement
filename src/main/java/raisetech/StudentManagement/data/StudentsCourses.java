@@ -8,8 +8,8 @@ import java.time.LocalDateTime;
 @Getter
 @Setter
 public class StudentsCourses {
-    private String id;
-    private String studentId;
+    private Long id;
+    private Long studentId;
     private String course;
     private LocalDateTime enrollmentStartDate;
     private LocalDateTime enrollmentEndDate;
