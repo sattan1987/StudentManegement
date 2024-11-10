@@ -37,12 +37,12 @@ public interface StudentRepository {
 
 
     @Select("SELECT * FROM students WHERE id = #{id}")
-    Student findById(Long id);
+    Student findById(int id);
 
     @Select("SELECT * FROM students_courses WHERE student_id = #{studentId}")
-    List<StudentsCourses> findCoursesByStudentId(Long studentId);
+    List<StudentsCourses> findCoursesByStudentId(int studentId);
 
     @Select("SELECT * FROM students_courses WHERE id = #{id}")
-    StudentsCourses findCourseById(Long id);
+    StudentsCourses findCourseById(int id);
 
 }

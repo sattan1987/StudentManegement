@@ -11,7 +11,6 @@ import raisetech.StudentManagement.domain.StudentDetail;
 
 import java.time.LocalDateTime;
 import java.util.List;
-import java.util.stream.Collectors;
 
 @Service
 public class StudentService {
@@ -44,7 +43,7 @@ public class StudentService {
     }
 
     @Transactional
-    public void updateStudent(Long id, StudentDetail studentDetail) {
+    public void updateStudent(int id, StudentDetail studentDetail) {
         // Student情報の更新
         Student student = studentDetail.getStudent();
         student.setId(id);
@@ -67,7 +66,7 @@ public class StudentService {
 }
 
 
-    public StudentDetail getStudentDetailById(Long id) {
+    public StudentDetail getStudentDetailById(int id) {
         Student student = repository.findById(id);
         List<StudentsCourses> studentsCourses = repository.findCoursesByStudentId(id);
         StudentDetail studentDetail = new StudentDetail();
