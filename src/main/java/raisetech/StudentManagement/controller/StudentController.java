@@ -16,7 +16,6 @@ import raisetech.StudentManagement.data.StudentsCourses;
 import raisetech.StudentManagement.domain.StudentDetail;
 import raisetech.StudentManagement.service.StudentService;
 
-import javax.naming.Binding;
 import java.util.Arrays;
 import java.util.List;
 
@@ -55,6 +54,21 @@ public class StudentController {
             return "registerStudent";
         }
         service.saveStudent(studentDetail);
+        return "redirect:/studentList";
+    }
+    @GetMapping("/updateStudent/{id}")
+    public String updateStudent(@PathVariable("id") int id, Model model) {
+        StudentDetail studentDetail = service.getStudentDetailById(id);
+        model.addAttribute("studentDetail", studentDetail);
+        return "updateStudent";
+    }
+
+    @PostMapping("/updateStudent/{id}")
+    public String updateStudent(@PathVariable("id") int id, @ModelAttribute StudentDetail studentDetail, BindingResult result) {
+        if (result.hasErrors()) {
+            return "updateStudent";
+        }
+        service.updateStudent(id, studentDetail);
         return "redirect:/studentList";
     }
 

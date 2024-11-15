@@ -28,4 +28,21 @@ public interface StudentRepository {
             "VALUES (#{studentId}, #{course}, #{enrollmentStartDate}, #{enrollmentEndDate})")
     @Options(useGeneratedKeys = true, keyProperty = "id")
     void saveStudentCourses(StudentsCourses studentsCourses);
+
+    @Update("UPDATE students SET name = #{name}, furigana = #{furigana}, nick_name = #{nickName}, email_address = #{emailAddress}, address = #{address}, age = #{age}, gender = #{gender}, remark = #{remark} WHERE id = #{id}")
+    void updateStudent(Student student);
+
+    @Update("UPDATE students_courses SET course = #{course}, enrollment_start_date = #{enrollmentStartDate}, enrollment_end_date = #{enrollmentEndDate} WHERE id = #{id} AND student_id = #{studentId}")
+    void updateStudentCourses(StudentsCourses studentsCourses);
+
+
+    @Select("SELECT * FROM students WHERE id = #{id}")
+    Student findById(int id);
+
+    @Select("SELECT * FROM students_courses WHERE student_id = #{studentId}")
+    List<StudentsCourses> findCoursesByStudentId(int studentId);
+
+    @Select("SELECT * FROM students_courses WHERE id = #{id}")
+    StudentsCourses findCourseById(int id);
+
 }

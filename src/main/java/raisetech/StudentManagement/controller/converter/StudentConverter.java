@@ -15,16 +15,16 @@ public class StudentConverter {
     public List<StudentDetail> convertStudentDetails(List<Student> students, List<StudentsCourses> studentsCourses) {
         List<StudentDetail> studentDetails = new ArrayList<>();
         students.forEach(student -> {
-            StudentDetail studentDetail = new StudentDetail();
-            studentDetail.setStudent(student);
+                    StudentDetail studentDetail = new StudentDetail();
+                    studentDetail.setStudent(student);
 
-            List<StudentsCourses> convertStudentCourses = studentsCourses.stream()
-                    .filter(studentsCourse -> student.getId().equals(studentsCourse.getStudentId()))
-                    .collect(Collectors.toList());
+                    List<StudentsCourses> convertStudentCourses = studentsCourses.stream()
+                            .filter(studentsCourse -> student.getId() == studentsCourse.getStudentId())
+                            .collect(Collectors.toList());
 
-            studentDetail.setStudentsCourses(convertStudentCourses);
-            studentDetails.add(studentDetail);
-        }
+                    studentDetail.setStudentsCourses(convertStudentCourses);
+                    studentDetails.add(studentDetail);
+                }
         );
         return studentDetails;
     }

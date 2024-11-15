@@ -1,7 +1,8 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-  <title>受講生更新</title>
+  <meta charset="UTF-8">
+  <title>受講生情報の更新</title>
   <style>
     .form-group {
       display: flex;
@@ -20,12 +21,22 @@
     .form-group textarea {
       height: 50px;
     }
+    .submit-button {
+      padding: 10px 20px;
+      background-color: #4CAF50;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+    .submit-button:hover {
+      background-color: #45a049;
+    }
   </style>
 </head>
 <body>
 <h1>受講生情報の更新</h1>
 <form th:action="@{/updateStudent/{id}(id=${studentDetail.student.id})}" th:object="${studentDetail}" method="post">
-  <!-- Hidden field to hold the student ID -->
   <input type="hidden" th:field="*{student.id}" />
 
   <div class="form-group">
@@ -71,9 +82,15 @@
     <label for="remark">備考</label>
     <textarea id="remark" th:field="*{student.remark}"></textarea>
   </div>
+  <div th:each="course, stat : *{studentsCourses}" class="form-group">
+    <input type="hidden" th:field="*{studentsCourses[__${stat.index}__].id}" />
+    <label for="course" th:for="*{studentsCourses[__${stat.index}__].course}">受講コース名</label>
+    <input type="text" id="course" th:field="*{studentsCourses[__${stat.index}__].course}"/>
+  </div>
+
 
   <div>
-    <button type="submit">更新</button>
+    <button type="submit" class="submit-button">更新</button>
   </div>
 </form>
 </body>
