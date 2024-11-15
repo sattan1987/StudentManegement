@@ -60,7 +60,7 @@ public class StudentService {
 
             updatedCourse.setStudentId(id);  // studentIdを設定
             repository.updateStudentCourses(updatedCourse);
-        }
+}
 
 
 }
