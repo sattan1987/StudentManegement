@@ -44,7 +44,7 @@ public class StudentController {
     public String newStudent(Model model) {
         StudentDetail studentDetail = new StudentDetail();
         studentDetail.setStudentsCourses(Arrays.asList(new StudentsCourses()));
-        model.addAttribute("studentDetail",studentDetail);
+        model.addAttribute("studentDetail", studentDetail);
         return "registerStudent";
     }
 
@@ -56,6 +56,7 @@ public class StudentController {
         service.saveStudent(studentDetail);
         return "redirect:/studentList";
     }
+
     @GetMapping("/updateStudent/{id}")
     public String updateStudent(@PathVariable("id") int id, Model model) {
         StudentDetail studentDetail = service.getStudentDetailById(id);
@@ -63,15 +64,15 @@ public class StudentController {
         return "updateStudent";
     }
 
+    // 修正: 重複しているPOSTメソッドを削除し、id型を統一
     @PostMapping("/updateStudent/{id}")
     public String updateStudent(@PathVariable("id") int id, @ModelAttribute StudentDetail studentDetail, BindingResult result) {
         if (result.hasErrors()) {
             return "updateStudent";
         }
-        service.updateStudent(id, studentDetail);
+        service.updateStudent(id, studentDetail);  // idと一緒に更新処理を行う
         return "redirect:/studentList";
     }
-
 
 }
 
