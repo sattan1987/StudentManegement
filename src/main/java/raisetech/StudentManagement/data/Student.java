@@ -19,20 +19,9 @@ public class Student {
     private String remark;
     private boolean isDeleted;
 
-    // Getter
-    public boolean getIsDeleted() { // "get" + プロパティ名 (isDeleted)
-        return isDeleted;
-    }
-
-    // Setter
-    public void setIsDeleted(boolean isDeleted) {
-        this.isDeleted = isDeleted;
-    }
-
-    public Student orElseThrow(Object studentNotFound) {
-        return null;
-    }
 }
+
+
 
 
 

@@ -77,10 +77,6 @@ public class StudentService {
     }
 
 
-    public void updateStudent(StudentDetail studentDetail) {
-    }
-
-
     @Transactional
     public void cancelStudentUpdate(int id) {
         // Student情報を取得し、isDeletedをtrueに設定
@@ -88,7 +84,7 @@ public class StudentService {
         if (student == null) {
             throw new RuntimeException("Student not found"); // エラーハンドリング
         }
-        student.setIsDeleted(true);  // 削除フラグを設定
+        student.setDeleted(true);  // 削除フラグを設定
         repository.updateStudent(student); // 更新処理を実行
     }
 
