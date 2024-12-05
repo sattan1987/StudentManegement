@@ -17,6 +17,7 @@ public class StudentService {
 
     private StudentRepository repository;
 
+
     @Autowired
     public StudentService(StudentRepository repository) {
         this.repository = repository;
@@ -60,10 +61,10 @@ public class StudentService {
 
             updatedCourse.setStudentId(id);  // studentIdを設定
             repository.updateStudentCourses(updatedCourse);
-}
+        }
 
 
-}
+    }
 
 
     public StudentDetail getStudentDetailById(int id) {
@@ -76,6 +77,16 @@ public class StudentService {
     }
 
 
+    @Transactional
+    public void cancelStudentUpdate(int id) {
+        // Student情報を取得し、isDeletedをtrueに設定
+        Student student = repository.findById(id);
+        if (student == null) {
+            throw new RuntimeException("Student not found"); // エラーハンドリング
+        }
+        student.setDeleted(true);  // 削除フラグを設定
+        repository.updateStudent(student); // 更新処理を実行
+    }
 
 }
 

@@ -1,97 +1,135 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-  <meta charset="UTF-8">
-  <title>受講生情報の更新</title>
-  <style>
-    .form-group {
-      display: flex;
-      align-items: center;
-      margin-bottom: 10px;
-    }
-    .form-group label {
-      width: 120px;
-      margin-right: 10px;
-      text-align: left;
-    }
-    .form-group input, .form-group select, .form-group textarea {
-      width: 200px;
-      padding: 5px;
-    }
-    .form-group textarea {
-      height: 50px;
-    }
-    .submit-button {
-      padding: 10px 20px;
-      background-color: #4CAF50;
-      color: white;
-      border: none;
-      border-radius: 5px;
-      cursor: pointer;
-    }
-    .submit-button:hover {
-      background-color: #45a049;
-    }
-  </style>
+    <meta charset="UTF-8">
+    <title>受講生情報更新</title>
+    <style>
+        .form-group {
+          display: flex;
+          align-items: center;
+          margin-bottom: 10px;
+        }
+        .form-group label {
+          width: 120px;
+          margin-right: 10px;
+          text-align: left;
+        }
+        .form-group input, .form-group select, .form-group textarea {
+          width: 200px;
+          padding: 5px;
+        }
+        .form-group textarea {
+          height: 50px;
+        }
+        .submit-button {
+          padding: 10px 20px;
+          background-color: #4CAF50;
+          color: white;
+          border: none;
+          border-radius: 5px;
+          cursor: pointer;
+        }
+        .submit-button:hover {
+          background-color: #45a049;
+        }
+        .back-button {
+          padding: 10px 20px;
+          background-color: #f44336;
+          color: white;
+          border: none;
+          border-radius: 5px;
+          cursor: pointer;
+          margin-right: 10px;
+        }
+        .back-button:hover {
+          background-color: #e53935;
+        }
+
+
+    </style>
 </head>
 <body>
-<h1>受講生情報の更新</h1>
+<h1>受講生情報更新</h1>
 <form th:action="@{/updateStudent/{id}(id=${studentDetail.student.id})}" th:object="${studentDetail}" method="post">
-  <input type="hidden" th:field="*{student.id}" />
+    <input type="hidden" th:field="*{student.id}"/>
 
-  <div class="form-group">
-    <label for="name">名前</label>
-    <input type="text" id="name" th:field="*{student.name}" required />
-  </div>
+    <div class="form-group">
+        <label for="name">名前</label>
+        <input type="text" id="name" th:field="*{student.name}" required/>
+    </div>
 
-  <div class="form-group">
-    <label for="furigana">フリガナ</label>
-    <input type="text" id="furigana" th:field="*{student.furigana}" required />
-  </div>
+    <div class="form-group">
+        <label for="furigana">フリガナ</label>
+        <input type="text" id="furigana" th:field="*{student.furigana}" required/>
+    </div>
 
-  <div class="form-group">
-    <label for="nickName">ニックネーム</label>
-    <input type="text" id="nickName" th:field="*{student.nickName}" />
-  </div>
+    <div class="form-group">
+        <label for="nickName">ニックネーム</label>
+        <input type="text" id="nickName" th:field="*{student.nickName}"/>
+    </div>
 
-  <div class="form-group">
-    <label for="emailAddress">メールアドレス</label>
-    <input type="email" id="emailAddress" th:field="*{student.emailAddress}" required />
-  </div>
+    <div class="form-group">
+        <label for="emailAddress">メールアドレス</label>
+        <input type="email" id="emailAddress" th:field="*{student.emailAddress}" required/>
+    </div>
 
-  <div class="form-group">
-    <label for="address">住所</label>
-    <input type="text" id="address" th:field="*{student.address}" required />
-  </div>
+    <div class="form-group">
+        <label for="address">住所</label>
+        <input type="text" id="address" th:field="*{student.address}" required/>
+    </div>
 
-  <div class="form-group">
-    <label for="age">年齢</label>
-    <input type="number" id="age" th:field="*{student.age}" />
-  </div>
+    <div class="form-group">
+        <label for="age">年齢</label>
+        <input type="number" id="age" th:field="*{student.age}"/>
+    </div>
 
-  <div class="form-group">
-    <label for="gender">性別</label>
-    <select id="gender" th:field="*{student.gender}">
-      <option value="男性">男性</option>
-      <option value="女性">女性</option>
-      <option value="その他">その他</option>
-    </select>
-  </div>
+    <div class="form-group">
+        <label for="gender">性別</label>
+        <select id="gender" th:field="*{student.gender}">
+            <option value="男性">男性</option>
+            <option value="女性">女性</option>
+            <option value="その他">その他</option>
+        </select>
+    </div>
 
-  <div class="form-group">
-    <label for="remark">備考</label>
-    <textarea id="remark" th:field="*{student.remark}"></textarea>
-  </div>
-  <div th:each="course, stat : *{studentsCourses}" class="form-group">
-    <input type="hidden" th:field="*{studentsCourses[__${stat.index}__].id}" />
-    <label for="course" th:for="*{studentsCourses[__${stat.index}__].course}">受講コース名</label>
-    <input type="text" id="course" th:field="*{studentsCourses[__${stat.index}__].course}"/>
-  </div>
+    <div class="form-group">
+        <label for="remark">備考</label>
+        <textarea id="remark" th:field="*{student.remark}"></textarea>
+    </div>
+
+    <div th:if="*{studentsCourses.size() == 0}">
+        <div class="form-group">
+            <label for="new-course">受講コース名</label>
+            <input type="text" id="new-course" name="studentsCourses[0].course" class="form-control"
+                   placeholder="コース登録がありません"/>
+            <input type="hidden" name="studentsCourses[0].id" value=""/>
+            <input type="hidden" name="studentsCourses[0].enrollmentStartDate" value=""/>
+            <input type="hidden" name="studentsCourses[0].enrollmentEndDate" value=""/>
+        </div>
+    </div>
+    <div th:if="*{studentsCourses.size() > 0}" th:each="course, stat : *{studentsCourses}" class="form-group">
+        <input type="hidden" th:field="*{studentsCourses[__${stat.index}__].id}"/>
+        <label for="course" th:for="*{studentsCourses[__${stat.index}__].course}">受講コース名</label>
+        <input type="text" id="course" th:field="*{studentsCourses[__${stat.index}__].course}"/>
+        <input type="hidden" th:field="*{studentsCourses[__${stat.index}__].enrollmentStartDate}"/>
+        <input type="hidden" th:field="*{studentsCourses[__${stat.index}__].enrollmentEndDate}"/>
+    </div>
+
+    <div class="form-group">
+        <label for="isDeleted">キャンセル</label>
+        <input type="checkbox" id="isDeleted" th:field="*{student.deleted}"/>
+    </div>
 
 
-  <div>
-    <button type="submit" class="submit-button">更新</button>
-  </div>
+    <div>
+        <button type="submit" class="submit-button">更新</button>
+    </div>
+
+    <div>
+        <button type="button" onclick="history.back()" class="back-button">戻る</button>
+    </div>
+
+
 </form>
 </body>
 </html>

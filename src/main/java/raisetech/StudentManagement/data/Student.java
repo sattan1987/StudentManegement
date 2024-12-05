@@ -18,6 +18,11 @@ public class Student {
     private String gender;
     private String remark;
     private boolean isDeleted;
+
 }
+
+
+
+
 
 
