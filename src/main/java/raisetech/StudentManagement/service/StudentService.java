@@ -16,8 +16,6 @@ import java.util.List;
 public class StudentService {
 
     private StudentRepository repository;
-    private int id;
-
 
     @Autowired
     public StudentService(StudentRepository repository) {
