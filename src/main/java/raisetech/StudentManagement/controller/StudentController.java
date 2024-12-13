@@ -61,37 +61,5 @@ public class StudentController {
         service.updateStudent(studentDetail);  // idと一緒に更新処理を行う
         return ResponseEntity.ok("更新に成功しました");
 
-
-        // 修正: 重複しているPOSTメソッドを削除し、id型を統一
-        // @PostMapping("/updateStudent/{id}")
-        // public String updateStudent(@PathVariable("id") int id, @ModelAttribute StudentDetail studentDetail, BindingResult result) {
-        //    if (result.hasErrors()) {
-        //     return "updateStudent";
-        //    }
-        //   service.updateStudent(id, studentDetail);  // idと一緒に更新処理を行う
-        //   return "redirect:/studentList";
     }
-
 }
-
-//    @GetMapping("studentsCoursesList")
-//    public List<StudentsCourses> getStudentCoursesList() {
-//        return service.searchStudentCoursesList();
-//    }
-//
-//    @GetMapping("students30s")
-//    public List<Student> getStudentsIn30s() {
-//        return service.searchStudentsInTheir30s();
-//    }
-//
-//    @GetMapping("/studentsJavaCourseInfo")
-//    public List<StudentsCourses> getJavaCourseInfo() {
-//        return service.searchJavaCourseInfo();
-//    }
-
-
-//@GetMapping("/updateStudent/{id}")
-//public String updateStudent(@PathVariable("id") int id, Model model) {
-//    StudentDetail studentDetail = service.getStudentDetailById(id);
-//    model.addAttribute("studentDetail", studentDetail);
-//  return "updateStudent";
