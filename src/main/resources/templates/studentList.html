@@ -3,9 +3,28 @@
 <head>
     <meta charset="UTF-8">
     <title>受講生一覧</title>
+    <style>.submit-button {
+    display: inline-block; /* インラインブロックでボタンのように表示 */
+    padding: 10px 20px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    text-decoration: none; /* リンクの下線を消す */
+}
+
+.submit-button:hover {
+    background-color: #45a049; /* ホバー時の色変更 */
+}
+    </style>
 </head>
 <body>
 <h1>受講生一覧</h1>
+<div>
+    <a th:href="@{/newStudent}" class="submit-button">新規登録</a>
+</div>
+
 
 <table border="1">
 
@@ -43,6 +62,8 @@
             <span th:text="${course.course}"></span>
 
     </tr>
+
+
     </tbody>
 </table>
 </body>

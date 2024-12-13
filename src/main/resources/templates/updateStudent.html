@@ -32,18 +32,21 @@
         .submit-button:hover {
           background-color: #45a049;
         }
-        .back-button {
-          padding: 10px 20px;
-          background-color: #f44336;
-          color: white;
-          border: none;
-          border-radius: 5px;
-          cursor: pointer;
-          margin-right: 10px;
-        }
-        .back-button:hover {
-          background-color: #e53935;
-        }
+       .back-button {
+    padding: 10px 20px;
+    background-color: #f44336;
+    color: white;
+    border: 2px solid #d32f2f; /* 外枠を追加 */
+    border-radius: 5px;
+    cursor: pointer;
+    margin-right: 30px;
+    text-decoration: none; /* リンクの下線を削除 */
+}
+
+.back-button:hover {
+    background-color: #e53935;
+    border-color: #c62828; /* ホバー時の外枠の色 */
+}
 
 
     </style>
@@ -89,6 +92,7 @@
             <option value="男性">男性</option>
             <option value="女性">女性</option>
             <option value="その他">その他</option>
+            <option value="無回答">無回答</option>
         </select>
     </div>
 
@@ -129,6 +133,9 @@
         <button type="button" onclick="history.back()" class="back-button">戻る</button>
     </div>
 
+    <div>
+        <a th:href="@{/studentList}" class="back-button">一覧に戻る</a>
+    </div>
 
 </form>
 </body>

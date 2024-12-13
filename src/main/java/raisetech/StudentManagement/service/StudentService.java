@@ -16,6 +16,7 @@ import java.util.List;
 public class StudentService {
 
     private StudentRepository repository;
+    private int id;
 
 
     @Autowired
@@ -44,10 +45,9 @@ public class StudentService {
     }
 
     @Transactional
-    public void updateStudent(int id, StudentDetail studentDetail) {
+    public void updateStudent(StudentDetail studentDetail) {
         // Student情報の更新
         Student student = studentDetail.getStudent();
-        student.setId(id);
         repository.updateStudent(student);
 
         // StudentsCourses情報の更新
@@ -59,8 +59,9 @@ public class StudentService {
             updatedCourse.setEnrollmentStartDate(existingCourse.getEnrollmentStartDate());
             updatedCourse.setEnrollmentEndDate(existingCourse.getEnrollmentEndDate());
 
-            updatedCourse.setStudentId(id);  // studentIdを設定
+            updatedCourse.setStudentId(student.getId());  // studentIdを設定
             repository.updateStudentCourses(updatedCourse);
+
         }
 
 
@@ -88,7 +89,6 @@ public class StudentService {
         repository.updateStudent(student); // 更新処理を実行
     }
 
-}
 
 //    public List<Student> searchStudentsInTheir30s() {
 //        return repository.search().stream()
@@ -104,3 +104,22 @@ public class StudentService {
 //    }
 
 
+//@Transactional
+//public void updateStudent(StudentDetail studentDetail) {
+// Student情報の更新
+//  Student student = studentDetail.getStudent();
+//student.setId(id);
+//repository.updateStudent(student);
+
+// StudentsCourses情報の更新
+//for (StudentsCourses updatedCourse : studentDetail.getStudentsCourses()) {
+// 現在のデータを取得
+//  StudentsCourses existingCourse = repository.findCourseById(updatedCourse.getId());
+
+// enrollment_start_dateとenrollment_end_dateを既存の値で上書き
+//updatedCourse.setEnrollmentStartDate(existingCourse.getEnrollmentStartDate());
+//updatedCourse.setEnrollmentEndDate(existingCourse.getEnrollmentEndDate());
+
+//updatedCourse.setStudentId(id);  // studentIdを設定
+//repository.updateStudentCourses(updatedCourse);
+}
