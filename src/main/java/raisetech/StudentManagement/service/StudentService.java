@@ -44,10 +44,9 @@ public class StudentService {
     }
 
     @Transactional
-    public void updateStudent(int id, StudentDetail studentDetail) {
+    public void updateStudent(StudentDetail studentDetail) {
         // Student情報の更新
         Student student = studentDetail.getStudent();
-        student.setId(id);
         repository.updateStudent(student);
 
         // StudentsCourses情報の更新
@@ -59,8 +58,9 @@ public class StudentService {
             updatedCourse.setEnrollmentStartDate(existingCourse.getEnrollmentStartDate());
             updatedCourse.setEnrollmentEndDate(existingCourse.getEnrollmentEndDate());
 
-            updatedCourse.setStudentId(id);  // studentIdを設定
+            updatedCourse.setStudentId(student.getId());  // studentIdを設定
             repository.updateStudentCourses(updatedCourse);
+
         }
 
 
@@ -87,20 +87,4 @@ public class StudentService {
         student.setDeleted(true);  // 削除フラグを設定
         repository.updateStudent(student); // 更新処理を実行
     }
-
 }
-
-//    public List<Student> searchStudentsInTheir30s() {
-//        return repository.search().stream()
-//                .filter(student -> student.getAge() >= 30 && student.getAge() <= 39)
-//                .collect(Collectors.toList());
-//
-//    }
-//
-//    public List<StudentsCourses>searchJavaCourseInfo() {
-//        return repository.searchCourses().stream()
-//                .filter(course -> course.getCourse().equals("Javaコース"))
-//                .collect(Collectors.toList());
-//    }
-
-
