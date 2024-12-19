@@ -53,6 +53,7 @@ public class StudentController {
     @PostMapping("/registerStudent")
     public ResponseEntity<StudentDetail> registerStudent(@RequestBody StudentDetail studentDetail) {
 
+
         StudentDetail responsestudentDetail = service.registerStudent(studentDetail);
         return ResponseEntity.ok(responsestudentDetail);
 
