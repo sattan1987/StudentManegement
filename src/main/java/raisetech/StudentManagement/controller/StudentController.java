@@ -17,24 +17,33 @@ import raisetech.StudentManagement.service.StudentService;
 import java.util.Arrays;
 import java.util.List;
 
+/**
+ * 受講生のの検索や登録、更新などを行う　REST　APIとして実行されるcontrollerです。
+ */
+
 @RestController
 public class StudentController {
 
+    /**
+     * 受講生サービス
+     */
     private StudentService service;
-    private StudentConverter converter;
 
     @Autowired
-    public StudentController(StudentService service, StudentConverter converter) {
+    public StudentController(StudentService service) {
         this.service = service;
-        this.converter = converter;
+
     }
 
+    /**
+     * 受講生一覧検索です
+     * 全体検索のため、条件指定は行わないものになります。
+     *
+     * @return　受講生一覧（全件）
+     */
     @GetMapping("/studentList")
     public List<StudentDetail> getStudentList() {
-        List<Student> students = service.searchStudentList();
-        List<StudentsCourses> studentsCourses = service.searchStudentCoursesList();
-
-        return converter.convertStudentDetails(students, studentsCourses);
+        return service.searchStudentList();
     }
 
     @GetMapping("/newStudent")
@@ -46,12 +55,10 @@ public class StudentController {
     }
 
     @PostMapping("/registerStudent")
-    public String registerStudent(@ModelAttribute StudentDetail studentDetail, BindingResult result) {
-        if (result.hasErrors()) {
-            return "registerStudent";
-        }
-        service.saveStudent(studentDetail);
-        return "redirect:/studentList";
+    public ResponseEntity<StudentDetail> registerStudent(@RequestBody StudentDetail studentDetail) {
+
+        StudentDetail responsestudentDetail = service.saveStudent(studentDetail);
+        return ResponseEntity.ok(responsestudentDetail);
 
     }
 
@@ -61,5 +68,17 @@ public class StudentController {
         service.updateStudent(studentDetail);  // idと一緒に更新処理を行う
         return ResponseEntity.ok("更新に成功しました");
 
+    }
+
+    /**
+     * 受講生検索です。
+     * IDに紐づく任意の受講生の情報を取得します。
+     *
+     * @param id 　受講生ID
+     * @return　受講生情報
+     */
+    @GetMapping("/Student/{id}")
+    public StudentDetail updateStudent(@PathVariable int id) {
+        return service.getStudentDetailById(id);
     }
 }
