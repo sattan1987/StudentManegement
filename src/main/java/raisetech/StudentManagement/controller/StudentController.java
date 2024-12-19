@@ -4,12 +4,8 @@ package raisetech.StudentManagement.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
-import raisetech.StudentManagement.controller.converter.StudentConverter;
-import raisetech.StudentManagement.data.Student;
 import raisetech.StudentManagement.data.StudentsCourses;
 import raisetech.StudentManagement.domain.StudentDetail;
 import raisetech.StudentManagement.service.StudentService;
@@ -57,7 +53,7 @@ public class StudentController {
     @PostMapping("/registerStudent")
     public ResponseEntity<StudentDetail> registerStudent(@RequestBody StudentDetail studentDetail) {
 
-        StudentDetail responsestudentDetail = service.saveStudent(studentDetail);
+        StudentDetail responsestudentDetail = service.registerStudent(studentDetail);
         return ResponseEntity.ok(responsestudentDetail);
 
     }
