@@ -48,7 +48,7 @@ public class StudentService {
 
 
     @Transactional
-    public StudentDetail saveStudent(StudentDetail studentDetail) {
+    public StudentDetail registerStudent(StudentDetail studentDetail) {
         repository.saveStudent(studentDetail.getStudent()); // リポジトリを使って保存
         for (StudentsCourses studentsCourses : studentDetail.getStudentsCourses()) {
             studentsCourses.setStudentId(studentDetail.getStudent().getId());
