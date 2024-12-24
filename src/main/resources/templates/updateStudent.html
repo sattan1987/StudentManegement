@@ -101,22 +101,22 @@
         <textarea id="remark" th:field="*{student.remark}"></textarea>
     </div>
 
-    <div th:if="*{studentsCourses.size() == 0}">
+    <div th:if="*{studentCourse.size() == 0}">
         <div class="form-group">
             <label for="new-course">受講コース名</label>
-            <input type="text" id="new-course" name="studentsCourses[0].course" class="form-control"
+            <input type="text" id="new-course" name="studentCourse[0].course" class="form-control"
                    placeholder="コース登録がありません"/>
-            <input type="hidden" name="studentsCourses[0].id" value=""/>
-            <input type="hidden" name="studentsCourses[0].enrollmentStartDate" value=""/>
-            <input type="hidden" name="studentsCourses[0].enrollmentEndDate" value=""/>
+            <input type="hidden" name="studentCourse[0].id" value=""/>
+            <input type="hidden" name="studentCourse[0].enrollmentStartDate" value=""/>
+            <input type="hidden" name="studentCourse[0].enrollmentEndDate" value=""/>
         </div>
     </div>
-    <div th:if="*{studentsCourses.size() > 0}" th:each="course, stat : *{studentsCourses}" class="form-group">
-        <input type="hidden" th:field="*{studentsCourses[__${stat.index}__].id}"/>
-        <label for="course" th:for="*{studentsCourses[__${stat.index}__].course}">受講コース名</label>
-        <input type="text" id="course" th:field="*{studentsCourses[__${stat.index}__].course}"/>
-        <input type="hidden" th:field="*{studentsCourses[__${stat.index}__].enrollmentStartDate}"/>
-        <input type="hidden" th:field="*{studentsCourses[__${stat.index}__].enrollmentEndDate}"/>
+    <div th:if="*{studentCourse.size() > 0}" th:each="course, stat : *{studentCourse}" class="form-group">
+        <input type="hidden" th:field="*{studentCourse[__${stat.index}__].id}"/>
+        <label for="course" th:for="*{studentCourse[__${stat.index}__].course}">受講コース名</label>
+        <input type="text" id="course" th:field="*{studentCourse[__${stat.index}__].course}"/>
+        <input type="hidden" th:field="*{studentCourse[__${stat.index}__].enrollmentStartDate}"/>
+        <input type="hidden" th:field="*{studentCourse[__${stat.index}__].enrollmentEndDate}"/>
     </div>
 
     <div class="form-group">
