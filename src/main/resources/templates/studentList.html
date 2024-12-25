@@ -58,7 +58,7 @@
         <td th:text="${studentDetail.student.gender}">男性</td>
         <td th:text="${studentDetail.student.remark}">特になし</td>
         <!-- 受講コース情報を表示 -->
-        <td th:each="course : ${studentDetail.studentsCourses}">
+        <td th:each="course : ${studentDetail.studentCourse}">
             <span th:text="${course.course}"></span>
 
     </tr>
