@@ -2,9 +2,12 @@ package raisetech.StudentManagement.controller;
 
 //import ch.qos.logback.core.model.Model;
 
+import jakarta.validation.constraints.Max;
+import jakarta.validation.constraints.Min;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.ui.Model;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import raisetech.StudentManagement.data.StudentCourse;
 import raisetech.StudentManagement.domain.StudentDetail;
@@ -16,7 +19,7 @@ import java.util.List;
 /**
  * 受講生のの検索や登録、更新などを行う　REST　APIとして実行されるcontrollerです。
  */
-
+@Validated
 @RestController
 public class StudentController {
 
@@ -46,7 +49,7 @@ public class StudentController {
      * @return　受講生情報
      */
     @GetMapping("/Student/{id}")
-    public StudentDetail updateStudent(@PathVariable int id) {
+    public StudentDetail getStudent(@PathVariable @Min(1) @Max(999) int id) {
         return service.getStudentDetailById(id);
     }
 

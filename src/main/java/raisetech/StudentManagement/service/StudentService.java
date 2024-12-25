@@ -54,7 +54,7 @@ public class StudentService {
      */
 
     public StudentDetail getStudentDetailById(int id) {
-        Student student = repository.findById(id);
+        Student student = repository.searchStudent(id);
         List<StudentCourse> studentsCours = repository.findCoursesByStudentId();
         return new StudentDetail(student, studentsCours);
     }
@@ -111,7 +111,7 @@ public class StudentService {
     @Transactional
     public void cancelStudentUpdate(int id) {
         // Student情報を取得し、isDeletedをtrueに設定
-        Student student = repository.findById(id);
+        Student student = repository.searchStudent(id);
         if (student == null) {
             throw new RuntimeException("Student not found"); // エラーハンドリング
         }
