@@ -11,6 +11,7 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import raisetech.StudentManagement.data.StudentCourse;
 import raisetech.StudentManagement.domain.StudentDetail;
+import raisetech.StudentManagement.exception.TestException;
 import raisetech.StudentManagement.service.StudentService;
 
 import java.util.Arrays;
@@ -39,6 +40,7 @@ public class StudentController {
      */
     @GetMapping("/studentList")
     public List<StudentDetail> getStudentList() {
+
         return service.searchStudentList();
     }
 
@@ -79,9 +81,8 @@ public class StudentController {
      * 受講生詳細の更新を行います。
      * キャンセルフラグの更新もここで行います
      *
-     * @param studentDetail　受講生詳細
+     * @param studentDetail 　受講生詳細
      * @return　実行結果
-     *
      */
 
     @PutMapping("/updateStudent")
@@ -91,5 +92,9 @@ public class StudentController {
 
     }
 
-
+    @GetMapping("/test")
+    public String testException() throws TestException {
+        // 意図的に例外を発生させる
+        throw new TestException("テスト例外が発生しました");
+    }
 }
