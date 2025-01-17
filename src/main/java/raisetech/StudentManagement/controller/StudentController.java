@@ -2,6 +2,7 @@ package raisetech.StudentManagement.controller;
 
 //import ch.qos.logback.core.model.Model;
 
+import io.swagger.v3.oas.annotations.Operation;
 import jakarta.validation.constraints.Max;
 import jakarta.validation.constraints.Min;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -38,6 +39,7 @@ public class StudentController {
      *
      * @return　受講生一覧（全件）
      */
+    @Operation(summary = "一覧検索",description = "受講生の一覧を検索します。")
     @GetMapping("/studentList")
     public List<StudentDetail> getStudentList() {
 
@@ -50,6 +52,7 @@ public class StudentController {
      * @param id 　受講生ID
      * @return　受講生情報
      */
+    @Operation(summary = "受講生番号検索",description = "受講生詳細の内容を受講生IDを使って検索します。")
     @GetMapping("/Student/{id}")
     public StudentDetail getStudent(@PathVariable @Min(1) @Max(999) int id) {
         return service.getStudentDetailById(id);
@@ -69,6 +72,7 @@ public class StudentController {
      * @param studentDetail 　受講生詳細
      * @return　実行結果
      */
+    @Operation(summary = "受講生登録",description = "受講生を登録します。")
     @PostMapping("/registerStudent")
     public ResponseEntity<StudentDetail> registerStudent(@RequestBody StudentDetail studentDetail) {
 
@@ -84,14 +88,14 @@ public class StudentController {
      * @param studentDetail 　受講生詳細
      * @return　実行結果
      */
-
+    @Operation(summary = "受講生詳細更新",description = "受講生詳細の内容を更新します。")
     @PutMapping("/updateStudent")
     public ResponseEntity<String> updateStudent(@RequestBody StudentDetail studentDetail) {
         service.updateStudent(studentDetail);  // idと一緒に更新処理を行う
         return ResponseEntity.ok("更新に成功しました");
 
     }
-
+    @Operation(summary = "エラーテスト",description = "エラーテストのため例外を発生させます。")
     @GetMapping("/test")
     public String testException() throws TestException {
         // 意図的に例外を発生させる
