@@ -75,4 +75,6 @@ public interface StudentRepository {
      * @return　受講生IDに紐づく受講生コース情報
      */
     List<StudentCourse> findCoursesByStudentId();
+
+    ;
 }

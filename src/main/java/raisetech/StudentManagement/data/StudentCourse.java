@@ -15,4 +15,13 @@ public class StudentCourse {
     private LocalDateTime enrollmentStartDate;
     private LocalDateTime enrollmentEndDate;
 
+    public StudentCourse(int i, String mathematics) {
+    }
+
+    public StudentCourse() {
+
+    }
+
+    public StudentCourse(int i, int id, String mathematics, LocalDateTime startDate, LocalDateTime endDate) {
+    }
 }
