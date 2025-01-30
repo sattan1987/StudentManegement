@@ -57,10 +57,7 @@ class StudentServiceTest {
     @Test
     void 受講生更新_データが入力された場合_リポジトリのメソッドが適切に呼び出されること() {
         // 事前準備
-        Student student = new Student();
-        student.setId(1); // IDを設定
-        student.setName("名無しのゴンベ"); // 名前を設定
-        student.setAge(25); // 年齢を設定
+        Student student = new Student(1, "名無しのゴンベ", 25);
 
         // コースデータを設定
         List<StudentCourse> studentCourseList = new ArrayList<>();
@@ -83,11 +80,7 @@ class StudentServiceTest {
     @Test
     void 受講生登録_データが入力された場合_リポジトリのメソッドが適切に呼び出されること() {
         // 事前準備：Student オブジェクトの設定
-        Student student = new Student();
-        student.setId(1); // StudentのIDを設定
-        student.setName("名無しのゴン"); // 名前を設定
-        student.setAge(22); // 年齢を設定
-
+        Student student = new Student(1, "名無しのゴンベ", 25);
         // StudentCourse リストの設定
         List<StudentCourse> studentCourseList = new ArrayList<>();
         LocalDateTime startDate = LocalDateTime.now();  // 開始日
