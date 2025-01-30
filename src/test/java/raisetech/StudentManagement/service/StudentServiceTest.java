@@ -57,7 +57,9 @@ class StudentServiceTest {
     @Test
     void 受講生更新_データが入力された場合_リポジトリのメソッドが適切に呼び出されること() {
         // 事前準備
-        Student student = new Student(1, "名無しのゴンベ", 25);
+        // すべてのデータを含めたオブジェクト作成
+        Student student = new Student(2, "佐藤 花子", "さとう はなこ", "ハナちゃん", "hanako@example.com",
+                "東京都港区", 22, "女性", "特になし", false);
 
         // コースデータを設定
         List<StudentCourse> studentCourseList = new ArrayList<>();
@@ -79,8 +81,10 @@ class StudentServiceTest {
 
     @Test
     void 受講生登録_データが入力された場合_リポジトリのメソッドが適切に呼び出されること() {
-        // 事前準備：Student オブジェクトの設定
-        Student student = new Student(1, "名無しのゴンベ", 25);
+        // 事前準備
+        // すべてのデータを含めたオブジェクト作成
+        Student student = new Student(2, "佐藤 花子", "さとう はなこ", "ハナちゃん", "hanako@example.com",
+                "東京都港区", 22, "女性", "特になし", false);
         // StudentCourse リストの設定
         List<StudentCourse> studentCourseList = new ArrayList<>();
         LocalDateTime startDate = LocalDateTime.now();  // 開始日

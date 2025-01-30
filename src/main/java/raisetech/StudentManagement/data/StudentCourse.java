@@ -5,6 +5,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 import java.time.LocalDateTime;
+
 @Schema(description = "受講生のコース情報")
 @Getter
 @Setter
@@ -15,13 +16,23 @@ public class StudentCourse {
     private LocalDateTime enrollmentStartDate;
     private LocalDateTime enrollmentEndDate;
 
-    public StudentCourse(int i, String mathematics) {
-    }
 
+    // デフォルトコンストラクタ
     public StudentCourse() {
-
     }
 
-    public StudentCourse(int i, int id, String mathematics, LocalDateTime startDate, LocalDateTime endDate) {
+    // IDとコース名だけをセットするコンストラクタ
+    public StudentCourse(int id, String course) {
+        this.id = id;
+        this.course = course;
+    }
+
+    // すべてのフィールドを適切にセットするコンストラクタ
+    public StudentCourse(int id, int studentId, String course, LocalDateTime enrollmentStartDate, LocalDateTime enrollmentEndDate) {
+        this.id = id;
+        this.studentId = studentId;
+        this.course = course;
+        this.enrollmentStartDate = enrollmentStartDate;
+        this.enrollmentEndDate = enrollmentEndDate;
     }
 }

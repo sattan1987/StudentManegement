@@ -76,5 +76,4 @@ public interface StudentRepository {
      */
     List<StudentCourse> findCoursesByStudentId();
 
-    ;
 }
