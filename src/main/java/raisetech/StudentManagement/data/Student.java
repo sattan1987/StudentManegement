@@ -1,6 +1,9 @@
 package raisetech.StudentManagement.data;
 
 import io.swagger.v3.oas.annotations.media.Schema;
+import jakarta.validation.constraints.Max;
+import jakarta.validation.constraints.Min;
+import jakarta.validation.constraints.NotBlank;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -9,16 +12,26 @@ import lombok.Setter;
 @Setter
 public class Student {
 
+
+    @Min(1)
+    @Max(value = 999,message = "999以下の数字のみ入力するようにしてください")
     private int id;
+    @NotBlank
     private String name;
+    @NotBlank
     private String furigana;
+    @NotBlank
     private String nickName;
+    @NotBlank
     private String emailAddress;
+    @NotBlank
     private String address;
+    @Min(10)
+    @Max(99)
     private int age;
     private String gender;
     private String remark;
-    private boolean deleted; // isDeleted → deleted に変更
+    private boolean deleted;
 
     // デフォルトコンストラクタ
     public Student() {
@@ -45,6 +58,8 @@ public class Student {
         this.remark = remark;
         this.deleted = deleted;
     }
+
+
 }
 
 
