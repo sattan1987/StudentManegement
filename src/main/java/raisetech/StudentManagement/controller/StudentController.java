@@ -3,6 +3,7 @@ package raisetech.StudentManagement.controller;
 //import ch.qos.logback.core.model.Model;
 
 import io.swagger.v3.oas.annotations.Operation;
+import jakarta.validation.Valid;
 import jakarta.validation.constraints.Max;
 import jakarta.validation.constraints.Min;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -90,7 +91,7 @@ public class StudentController {
      */
     @Operation(summary = "受講生詳細更新",description = "受講生詳細の内容を更新します。")
     @PutMapping("/updateStudent")
-    public ResponseEntity<String> updateStudent(@RequestBody StudentDetail studentDetail) {
+    public ResponseEntity<String> updateStudent(@Valid @RequestBody StudentDetail studentDetail) {
         service.updateStudent(studentDetail);  // idと一緒に更新処理を行う
         return ResponseEntity.ok("更新に成功しました");
 

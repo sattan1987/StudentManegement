@@ -4,6 +4,7 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.validation.constraints.Max;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -12,7 +13,7 @@ import lombok.Setter;
 @Setter
 public class Student {
 
-
+    @NotNull(message = "IDは必須です")
     @Min(1)
     @Max(value = 999,message = "999以下の数字のみ入力するようにしてください")
     private int id;

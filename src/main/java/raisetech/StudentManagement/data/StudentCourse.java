@@ -11,6 +11,7 @@ import java.time.LocalDateTime;
 @Getter
 @Setter
 public class StudentCourse {
+    @NotNull(message = "コースIDは必須です")
     private int id;
     @NotNull
     private int studentId;

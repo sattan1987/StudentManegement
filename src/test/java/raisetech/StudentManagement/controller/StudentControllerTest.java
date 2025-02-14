@@ -135,4 +135,55 @@ class StudentControllerTest {
                 .andExpect(content().string("テスト例外が発生しました"));
     }
 
+    @Test
+    void newStudentの取得が成功すること() throws Exception {
+        mockMvc.perform(get("/newstudent"))
+                .andExpect(status().isOk())
+                .andExpect(content().contentType("text/plain;charset=UTF-8"))
+                .andExpect(content().string("registerstudent"));
+    }
+
+    @Test
+    public void updateStudentが成功すること() throws Exception {
+        String requestBody = """
+        {
+            "student": {
+                "id": 1,
+                "name": "Updated Student",
+                "furigana": "アップデート スチューデント",
+                "nickName": "アップ",
+                "emailAddress": "updated@example.com",
+                "address": "東京都",
+                "age": 20,
+                "gender": "Male",
+                "remark": "テストデータ",
+                "deleted": false
+            },
+            "studentCourseList": []
+        }
+        """;
+
+        mockMvc.perform(put("/updateStudent")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(requestBody))
+                .andExpect(status().isOk()) // ← 400 ではなく 200 を期待
+                .andExpect(content().string("更新に成功しました"));
+    }
+
+    @Test
+    void updateStudentで無効なデータを送信すると400を返す() throws Exception {
+        String requestBody = """
+    {
+        "id": null,
+        "name": "Invalid Student"
+    }
+    """;
+
+        mockMvc.perform(put("/updateStudent")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(requestBody))
+                .andExpect(status().isBadRequest()); // 400 Bad Request を期待
+    }
+
+
 }
