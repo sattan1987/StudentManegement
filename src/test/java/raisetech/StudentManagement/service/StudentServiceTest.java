@@ -59,7 +59,7 @@ class StudentServiceTest {
         // 事前準備
         // すべてのデータを含めたオブジェクト作成
         Student student = new Student(2, "佐藤 花子", "さとう はなこ", "ハナちゃん", "hanako@example.com",
-                "東京都港区", 22, "女性", "特になし", false);
+                "東京都港区", 22,"女性","",false);
 
         // コースデータを設定
         List<StudentCourse> studentCourseList = new ArrayList<>();
@@ -84,7 +84,7 @@ class StudentServiceTest {
         // 事前準備
         // すべてのデータを含めたオブジェクト作成
         Student student = new Student(2, "佐藤 花子", "さとう はなこ", "ハナちゃん", "hanako@example.com",
-                "東京都港区", 22, "女性", "特になし", false);
+                "東京都港区", 22,"女性","",false);
         // StudentCourse リストの設定
         List<StudentCourse> studentCourseList = new ArrayList<>();
         LocalDateTime startDate = LocalDateTime.now();  // 開始日

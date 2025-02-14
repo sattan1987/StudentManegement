@@ -2,6 +2,7 @@ package raisetech.StudentManagement.domain;
 
 import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.validation.Valid;
+import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -19,8 +20,10 @@ import java.util.List;
 public class StudentDetail {
 
     @Schema(description = "受講生情報")
+    @NotNull(message = "studentは必須です")
     @Valid
     private Student student;
+
     @Schema(description = "受講生が登録しているコースの情報")
     @Valid
     private List<StudentCourse> studentCourseList;
