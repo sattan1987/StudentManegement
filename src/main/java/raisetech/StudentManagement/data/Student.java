@@ -37,16 +37,9 @@ public class Student {
     public Student() {
     }
 
-    // ID、名前、年齢を設定するコンストラクタ
-    public Student(int id, String name, int age) {
-        this.id = id;
-        this.name = name;
-        this.age = age;
-    }
-
     // すべてのフィールドを設定するコンストラクタ
     public Student(int id, String name, String furigana, String nickName, String emailAddress,
-                   String address, int age, String gender, String remark, boolean deleted) {
+                   String address, int age,String gender,String remark,Boolean deleted) {
         this.id = id;
         this.name = name;
         this.furigana = furigana;

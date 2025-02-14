@@ -1,5 +1,6 @@
 package raisetech.StudentManagement.controller;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import jakarta.validation.ConstraintViolation;
 import jakarta.validation.Validation;
 import jakarta.validation.Validator;
@@ -7,6 +8,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 
 import raisetech.StudentManagement.data.Student;
@@ -20,6 +22,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
+import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 @WebMvcTest(StudentController.class)
@@ -87,24 +90,15 @@ class StudentControllerTest {
 
     @Test
     void getStudentAPIが正常にデータを取得できること() throws Exception {
-        // モックデータの作成
-        Student student = new Student();
-        student.setId(1);  // IDを設定
-        student.setName("秋元佐智");
-        student.setFurigana("アキモトサチ");
-        student.setNickName("さっちゃん");
-        student.setEmailAddress("aaa@example.com");
-        student.setAddress("宇都宮市");
-        student.setAge(38);
+        // コンストラクタを使用してオブジェクトを作成
+        Student student = new Student(1, "秋元佐智", "アキモトサチ", "さっちゃん", "aaa@example.com", "宇都宮市", 38, "女性", "", false);
 
-        // StudentDetail に Student をセット
+
         StudentDetail studentDetail = new StudentDetail();
         studentDetail.setStudent(student);
 
-        // サービスの動作をモック化
         when(service.getStudentDetailById(1)).thenReturn(studentDetail);
 
-        // APIリクエストを送信してレスポンスを検証
         mockMvc.perform(get("/student/1"))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.student.id").value(1))
@@ -115,7 +109,30 @@ class StudentControllerTest {
                 .andExpect(jsonPath("$.student.address").value("宇都宮市"))
                 .andExpect(jsonPath("$.student.age").value(38));
 
-        // サービスメソッドが1回呼び出されたことを検証
         verify(service, times(1)).getStudentDetailById(1);
     }
+
+    @Test
+    void createStudentAPIが正常に動作すること() throws Exception {
+        // 新規 Student のモックデータ作成
+        Student student = new Student(2, "佐藤一郎", "サトウイチロウ", "いっちゃん", "satou@example.com", "東京", 25, "男性", "", false);
+
+        // JSON 形式に変換
+        String studentJson = new ObjectMapper().writeValueAsString(student);
+
+        mockMvc.perform(post("/registerstudent")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content("{\"id\":2, \"name\":\"佐藤一郎\", \"furigana\":\"サトウイチロウ\", \"nickName\":\"いっちゃん\", \"emailAddress\":\"satou@example.com\", \"address\":\"東京\", \"age\":25, \"gender\":\"男性\", \"remark\":\"\", \"deleted\":false}"))
+                .andExpect(status().isOk());
+
+
+    }
+
+    @Test
+    void testExceptionが発生すること() throws Exception {
+        mockMvc.perform(get("/test"))
+                .andExpect(status().isBadRequest())
+                .andExpect(content().string("テスト例外が発生しました"));
+    }
+
 }
