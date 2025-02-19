@@ -3,6 +3,7 @@ package raisetech.StudentManagement.controller;
 //import ch.qos.logback.core.model.Model;
 
 import io.swagger.v3.oas.annotations.Operation;
+import jakarta.validation.Valid;
 import jakarta.validation.constraints.Max;
 import jakarta.validation.constraints.Min;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -53,17 +54,17 @@ public class StudentController {
      * @return　受講生情報
      */
     @Operation(summary = "受講生番号検索",description = "受講生詳細の内容を受講生IDを使って検索します。")
-    @GetMapping("/Student/{id}")
+    @GetMapping("/student/{id}")
     public StudentDetail getStudent(@PathVariable @Min(1) @Max(999) int id) {
         return service.getStudentDetailById(id);
     }
 
-    @GetMapping("/newStudent")
+    @GetMapping("/newstudent")
     public String newStudent(Model model) {
         StudentDetail studentDetail = new StudentDetail();
         studentDetail.setStudentCourseList(Arrays.asList(new StudentCourse()));
         model.addAttribute("studentDetail", studentDetail);
-        return "registerStudent";
+        return "registerstudent";
     }
 
     /**
@@ -73,7 +74,7 @@ public class StudentController {
      * @return　実行結果
      */
     @Operation(summary = "受講生登録",description = "受講生を登録します。")
-    @PostMapping("/registerStudent")
+    @PostMapping("/registerstudent")
     public ResponseEntity<StudentDetail> registerStudent(@RequestBody StudentDetail studentDetail) {
 
         StudentDetail responsestudentDetail = service.registerStudent(studentDetail);
@@ -90,7 +91,7 @@ public class StudentController {
      */
     @Operation(summary = "受講生詳細更新",description = "受講生詳細の内容を更新します。")
     @PutMapping("/updateStudent")
-    public ResponseEntity<String> updateStudent(@RequestBody StudentDetail studentDetail) {
+    public ResponseEntity<String> updateStudent(@Valid @RequestBody StudentDetail studentDetail) {
         service.updateStudent(studentDetail);  // idと一緒に更新処理を行う
         return ResponseEntity.ok("更新に成功しました");
 
