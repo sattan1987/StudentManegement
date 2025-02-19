@@ -22,7 +22,14 @@ public class StudentCourse {
 
     // デフォルトコンストラクタ
     public StudentCourse() {
+    }// 引数で渡された値を使ってフィールドを設定するコンストラクター
+
+    public StudentCourse(int id, int studentId, String course) {
+        this.id = id;
+        this.studentId = studentId;
+        this.course = course;
     }
+
 
     // IDとコース名だけをセットするコンストラクタ
     public StudentCourse(int id, String course) {
@@ -38,4 +45,6 @@ public class StudentCourse {
         this.enrollmentStartDate = enrollmentStartDate;
         this.enrollmentEndDate = enrollmentEndDate;
     }
+
+
 }
