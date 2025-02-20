@@ -51,7 +51,7 @@ class StudentControllerTest {
     @Test
     void 受講生詳細の受講生で入力チェックに異常がないこと() {
 
-        Student student = new Student();
+        Student student = new Student(1, "Alice");
 
         student.setId(80);
         student.setName("秋元佐智");
@@ -70,7 +70,7 @@ class StudentControllerTest {
     @Test
     void 受講生詳細の受講生でIDに範囲外の数字を用いた際に入力チェックにかかること() {
 
-        Student student = new Student();
+        Student student = new Student(1, "Alice");
 
         student.setId(1000);
         student.setName("秋元佐智");
@@ -83,7 +83,7 @@ class StudentControllerTest {
         Set<ConstraintViolation<Object>> violations = validator.validate(student);
 
         assertThat(violations.size()).isEqualTo(1);
-        assertThat(violations).extracting("message").containsOnly("数字のみ入力するようにしてください");
+        assertThat(violations).extracting("message").containsOnly("999以下の数字のみ入力するようにしてください");
 
 
     }
@@ -166,7 +166,7 @@ class StudentControllerTest {
         mockMvc.perform(put("/updateStudent")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(requestBody))
-                .andExpect(status().isOk()) // ← 400 ではなく 200 を期待
+                .andExpect(status().isOk())
                 .andExpect(content().string("更新に成功しました"));
     }
 

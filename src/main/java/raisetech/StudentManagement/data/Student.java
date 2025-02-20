@@ -15,7 +15,7 @@ public class Student {
 
     @NotNull(message = "IDは必須です")
     @Min(1)
-    @Max(value = 999,message = "999以下の数字のみ入力するようにしてください")
+    @Max(value = 999, message = "999以下の数字のみ入力するようにしてください")
     private int id;
     @NotBlank
     private String name;
@@ -34,13 +34,20 @@ public class Student {
     private String remark;
     private boolean deleted;
 
+
     // デフォルトコンストラクタ
     public Student() {
     }
 
+    // 受け取ったidとnameを設定するコンストラクタ
+    public Student(int id, String name) {
+        this.id = id;  // idを設定
+        this.name = name;  // nameを設定
+    }
+
     // すべてのフィールドを設定するコンストラクタ
     public Student(int id, String name, String furigana, String nickName, String emailAddress,
-                   String address, int age,String gender,String remark,Boolean deleted) {
+                   String address, int age, String gender, String remark, Boolean deleted) {
         this.id = id;
         this.name = name;
         this.furigana = furigana;
@@ -55,6 +62,7 @@ public class Student {
 
 
 }
+
 
 
 
