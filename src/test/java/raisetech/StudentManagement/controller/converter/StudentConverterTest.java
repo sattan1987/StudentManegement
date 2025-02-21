@@ -16,27 +16,26 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 public class StudentConverterTest {
 
     private StudentConverter converter;
-    private List<Student> students;
-    private List<StudentCourse> courses;
 
     @BeforeEach
     void setUp() {
-        // Converter のインスタンス作成
+        // Converter のインスタンスを作成
         converter = new StudentConverter();
     }
 
     @Test
     void 受講生が複数のコースを持つ場合_正しくマッピングされること() {
-        // 受講生とコースを準備
-        Student student1 = new Student(1, "Alice");
-        Student student2 = new Student(2, "Bob");
+        // 受講生とコースを準備（ここでローカル変数として定義）
+        List<Student> students = Arrays.asList(
+                new Student(1, "Alice"),
+                new Student(2, "Bob")
+        );
 
-        StudentCourse course1 = new StudentCourse(1, 1, "Math");
-        StudentCourse course2 = new StudentCourse(2, 1, "Science");
-        StudentCourse course3 = new StudentCourse(3, 2, "History");
-
-        students = Arrays.asList(student1, student2);
-        courses = Arrays.asList(course1, course2, course3);
+        List<StudentCourse> courses = Arrays.asList(
+                new StudentCourse(1, 1, "Math"),
+                new StudentCourse(2, 1, "Science"),
+                new StudentCourse(3, 2, "History")
+        );
 
         // メソッド実行
         List<StudentDetail> result = converter.convertStudentDetails(students, courses);
@@ -49,10 +48,8 @@ public class StudentConverterTest {
 
     @Test
     void 受講生がコースを持たない場合_空のコースリストが返されること() {
-        Student student = new Student(1, "Alice");
-
-        students = Collections.singletonList(student);
-        courses = Collections.emptyList();
+        List<Student> students = Collections.singletonList(new Student(1, "Alice"));
+        List<StudentCourse> courses = Collections.emptyList();
 
         List<StudentDetail> result = converter.convertStudentDetails(students, courses);
 
@@ -62,8 +59,8 @@ public class StudentConverterTest {
 
     @Test
     void 空のリストを渡した場合_空のリストが返されること() {
-        students = Collections.emptyList();
-        courses = Collections.emptyList();
+        List<Student> students = Collections.emptyList();
+        List<StudentCourse> courses = Collections.emptyList();
 
         List<StudentDetail> result = converter.convertStudentDetails(students, courses);
 
@@ -72,11 +69,8 @@ public class StudentConverterTest {
 
     @Test
     void 受講生とコースのIDが一致しない場合_コースなしとして扱われること() {
-        Student student = new Student(1, "Alice");
-        StudentCourse course = new StudentCourse(1, 2, "Math");  // 違う受講生ID
-
-        students = Collections.singletonList(student);
-        courses = Collections.singletonList(course);
+        List<Student> students = Collections.singletonList(new Student(1, "Alice"));
+        List<StudentCourse> courses = Collections.singletonList(new StudentCourse(1, 2, "Math")); // 違う受講生ID
 
         List<StudentDetail> result = converter.convertStudentDetails(students, courses);
 
