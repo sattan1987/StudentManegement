@@ -32,7 +32,7 @@ public class Student {
     private int age;
     private String gender;
     private String remark;
-    private boolean deleted;
+    private boolean isDeleted;
 
 
     // デフォルトコンストラクタ
@@ -47,7 +47,7 @@ public class Student {
 
     // すべてのフィールドを設定するコンストラクタ
     public Student(int id, String name, String furigana, String nickName, String emailAddress,
-                   String address, int age, String gender, String remark, Boolean deleted) {
+                   String address, int age, String gender, String remark, Boolean isDeleted) {
         this.id = id;
         this.name = name;
         this.furigana = furigana;
@@ -57,7 +57,7 @@ public class Student {
         this.age = age;
         this.gender = gender;
         this.remark = remark;
-        this.deleted = deleted;
+        this.isDeleted = isDeleted;
     }
 
 
