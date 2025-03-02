@@ -38,7 +38,7 @@ public class StudentCourse {
     }
 
     // すべてのフィールドを適切にセットするコンストラクタ
-    public StudentCourse(int id, int studentId, String course, LocalDateTime enrollmentStartDate, LocalDateTime enrollmentEndDate) {
+    public StudentCourse(Integer id, int studentId, String course, LocalDateTime enrollmentStartDate, LocalDateTime enrollmentEndDate) {
         this.id = id;
         this.studentId = studentId;
         this.course = course;

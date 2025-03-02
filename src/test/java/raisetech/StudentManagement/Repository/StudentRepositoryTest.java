@@ -27,24 +27,39 @@ class StudentRepositoryTest {
 
     @Test
     void 受講生の登録が行えること() {
-        Student student = new Student();
+        // Arrange: 登録するStudentオブジェクトを作成
+        Student student = new Student(
+                null,  // IDはAutoインクリメント
+                "佐藤一郎",
+                "サトウイチロウ",
+                "いっちゃん",
+                "satou@example.com",
+                "東京",
+                25,
+                "男性",
+                "",
+                false
+        );
 
-
-        student.setName("佐藤一郎");
-        student.setFurigana("サトウイチロウ");
-        student.setNickName("いっちゃん");
-        student.setEmailAddress("satou@example.com");
-        student.setAddress("東京");
-        student.setAge(25);
-        student.setGender("男性");
-        student.setRemark("");
-        student.setDeleted(false);
-
+        // Act: 受講生を登録
         sut.registerStudent(student);
 
+        // Act: すべての受講生を取得
         List<Student> actual = sut.search();
 
+        // Assert: 件数が6件であることを確認
         assertThat(actual.size()).isEqualTo(6);
+
+        // Assert: 最後に追加された受講生の中身を検証
+        Student lastStudent = actual.get(actual.size() - 1);  // リストの最後の要素を取得
+        assertThat(lastStudent.getName()).isEqualTo("佐藤一郎");
+        assertThat(lastStudent.getFurigana()).isEqualTo("サトウイチロウ");
+        assertThat(lastStudent.getNickName()).isEqualTo("いっちゃん");
+        assertThat(lastStudent.getEmailAddress()).isEqualTo("satou@example.com");
+        assertThat(lastStudent.getAddress()).isEqualTo("東京");
+        assertThat(lastStudent.getAge()).isEqualTo(25);
+        assertThat(lastStudent.getGender()).isEqualTo("男性");
+        assertThat(lastStudent.isDeleted()).isFalse();
     }
 
 
@@ -59,6 +74,14 @@ class StudentRepositoryTest {
         assertThat(student.getId()).isEqualTo(1); // IDが一致するか
         assertThat(student.getName()).isEqualTo("山田太郎"); // 名前が一致するか
         assertThat(student.getEmailAddress()).isEqualTo("taro@example.com"); // メールアドレスが一致するか
+        // `equals()`と`hashCode()`の確認
+        Student student2 = sut.searchStudent(1); // 同じIDで再取得したStudentオブジェクト
+
+        // equals()が一致することを確認
+        assertThat(student.equals(student2)).isTrue();
+
+        // hashCode()が一致することを確認
+        assertThat(student.hashCode()).isEqualTo(student2.hashCode());
     }
 
     @Test
@@ -77,12 +100,13 @@ class StudentRepositoryTest {
     @Test
     void 受講生コース情報の登録が行えること() {
         // 新規受講生コース情報を作成
-        StudentCourse studentCourse = new StudentCourse();
-        studentCourse.setStudentId(1);  // 既存の受講生IDを使用（IDが存在することを前提）
-        studentCourse.setCourse("Java基礎");
-        studentCourse.setEnrollmentStartDate(LocalDateTime.of(2024, 4, 1, 0, 0, 0, 0));
-        studentCourse.setEnrollmentEndDate(LocalDateTime.of(2024, 9, 30, 23, 59, 59, 0));
-
+        StudentCourse studentCourse = new StudentCourse(
+                0,  // IDはAutoインクリメント
+                1,     // 既存の受講生IDを使用（IDが存在することを前提）
+                "Java基礎",
+                LocalDateTime.of(2024, 4, 1, 0, 0, 0, 0),
+                LocalDateTime.of(2024, 9, 30, 23, 59, 59, 0)
+        );
         // 登録前の受講生コース数を取得
         List<StudentCourse> beforeCourses = sut.findCoursesByStudentId(1);
         int beforeCount = beforeCourses.size();
@@ -130,6 +154,8 @@ class StudentRepositoryTest {
         Student updatedStudent = sut.searchStudent(1);
         assertThat(updatedStudent.getName()).isEqualTo("更新 太郎");
         assertThat(updatedStudent.getEmailAddress()).isEqualTo("updated@example.com");
+        assertThat(student.equals(updatedStudent)).isTrue();
+        assertThat(student.hashCode()).isEqualTo(updatedStudent.hashCode());
     }
 
 
@@ -147,6 +173,8 @@ class StudentRepositoryTest {
         List<StudentCourse> updatedCourses = sut.findCoursesByStudentId(1);
         StudentCourse updatedCourse = updatedCourses.get(0);
         assertThat(updatedCourse.getCourse()).isEqualTo("Java応用");
+
+
     }
     @Test
     void 受講生のコース情報の全件検索が行えること() {
