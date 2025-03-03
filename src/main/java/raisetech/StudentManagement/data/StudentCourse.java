@@ -6,6 +6,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 import java.time.LocalDateTime;
+import java.util.Objects;
 
 @Schema(description = "受講生のコース情報")
 @Getter
@@ -46,5 +47,19 @@ public class StudentCourse {
         this.enrollmentEndDate = enrollmentEndDate;
     }
 
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) return true;
+        if (obj == null || getClass() != obj.getClass()) return false;
+        StudentCourse that = (StudentCourse) obj;
+        return Objects.equals(id, that.id) &&
+                Objects.equals(course, that.course) &&
+                Objects.equals(studentId, that.studentId);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, course, studentId);
+    }
 
 }
