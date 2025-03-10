@@ -41,14 +41,14 @@ class StudentServiceTest {
         List<StudentCourse> studentCourseList = new ArrayList<>();
 
         when(repository.search()).thenReturn(studentList);
-        when(repository.findCoursesByStudentId()).thenReturn(studentCourseList); // メソッド名を実装と一致させる
+        when(repository.findCoursesByStudentId(1)).thenReturn(studentCourseList); // メソッド名を実装と一致させる
 
         // 実行
         sut.searchStudentList();
 
         // 検証
         verify(repository, times(1)).search();
-        verify(repository, times(1)).findCoursesByStudentId(); // 修正箇所
+        verify(repository, times(1)).findCoursesByStudentId(1); // 修正箇所
         verify(converter, times(1)).convertStudentDetails(studentList, studentCourseList);
 
 

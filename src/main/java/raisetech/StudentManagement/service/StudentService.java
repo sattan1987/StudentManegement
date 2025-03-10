@@ -42,7 +42,7 @@ public class StudentService {
      */
     public List<StudentDetail> searchStudentList() {
         List<Student> studentList = repository.search();
-        List<StudentCourse> studentCourseList = repository.findCoursesByStudentId();
+        List<StudentCourse> studentCourseList = repository.findCoursesByStudentId(1);
         return converter.convertStudentDetails(studentList, studentCourseList);
     }
 
@@ -55,7 +55,7 @@ public class StudentService {
 
     public StudentDetail getStudentDetailById(int id) {
         Student student = repository.searchStudent(id);
-        List<StudentCourse> studentsCours = repository.findCoursesByStudentId();
+        List<StudentCourse> studentsCours = repository.findCoursesByStudentId(1);
         return new StudentDetail(student, studentsCours);
     }
 
