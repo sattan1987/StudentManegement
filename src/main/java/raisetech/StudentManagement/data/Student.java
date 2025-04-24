@@ -29,8 +29,7 @@ public class Student {
     private String emailAddress;
     @NotBlank
     private String address;
-    @Min(10)
-    @Max(99)
+    @Min(18)
     private int age;
     private String gender;
     private String remark;
@@ -48,8 +47,7 @@ public class Student {
     }
 
     // すべてのフィールドを設定するコンストラクタ
-    public Student(Integer id, String name, String furigana, String nickName, String emailAddress,
-                   String address, int age, String gender, String remark, Boolean isDeleted) {
+    public Student(Integer id, String name, String furigana, String nickName, String emailAddress, String address, int age, String gender, String remark, Boolean isDeleted) {
         this.id = id;
         this.name = name;
         this.furigana = furigana;
@@ -61,6 +59,7 @@ public class Student {
         this.remark = remark;
         this.isDeleted = isDeleted;
     }
+
     // equalsメソッド
     @Override
     public boolean equals(Object obj) {

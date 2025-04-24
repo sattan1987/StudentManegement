@@ -91,7 +91,7 @@ class StudentServiceTest {
         LocalDateTime endDate = LocalDateTime.now();  // 終了日
 
         // コースの追加（仮に "Science" コースを追加）
-        StudentCourse course = new StudentCourse(1, student.getId(), "Science", startDate, endDate);
+        StudentCourse course = new StudentCourse(1, student.getId(), "Science", startDate, endDate );
         studentCourseList.add(course);  // コースリストに追加
 
         // StudentDetail を作成

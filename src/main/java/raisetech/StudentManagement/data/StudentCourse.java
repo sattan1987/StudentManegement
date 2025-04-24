@@ -1,6 +1,7 @@
 package raisetech.StudentManagement.data;
 
 import io.swagger.v3.oas.annotations.media.Schema;
+import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import lombok.Getter;
 import lombok.Setter;
@@ -13,16 +14,19 @@ import java.util.Objects;
 @Setter
 public class StudentCourse {
     @NotNull(message = "コースIDは必須です")
-    private int id;
+    private Integer id;
     @NotNull
-    private int studentId;
+    private Integer studentId;
     private String course;
     private LocalDateTime enrollmentStartDate;
     private LocalDateTime enrollmentEndDate;
+    @Schema(description = "申込ステータス（仮申込・本申込・受講中・受講終了）")
+    @NotBlank(message = "ステータスは必須です")
+    private String status;
 
 
     // デフォルトコンストラクタ
-    public StudentCourse() {
+    public StudentCourse(int i, int i1, String java基礎, LocalDateTime localDateTime, LocalDateTime dateTime) {
     }// 引数で渡された値を使ってフィールドを設定するコンストラクター
 
     public StudentCourse(int id, int studentId, String course) {
@@ -39,12 +43,13 @@ public class StudentCourse {
     }
 
     // すべてのフィールドを適切にセットするコンストラクタ
-    public StudentCourse(Integer id, int studentId, String course, LocalDateTime enrollmentStartDate, LocalDateTime enrollmentEndDate) {
+    public StudentCourse(Integer id, int studentId, String course, LocalDateTime enrollmentStartDate, LocalDateTime enrollmentEndDate, String status) {
         this.id = id;
         this.studentId = studentId;
         this.course = course;
         this.enrollmentStartDate = enrollmentStartDate;
         this.enrollmentEndDate = enrollmentEndDate;
+        this.status = status;
     }
 
     @Override
