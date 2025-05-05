@@ -76,4 +76,33 @@ public interface StudentRepository {
      */
     List<StudentCourse> findCoursesByStudentId(int i);
 
+    /**
+     * 名前で受講生を検索します。
+     *
+     * @param name 受講生の名前
+     * @return 名前で一致する受講生リスト
+     */
+    List<Student> searchByName(String name);
+
+    /**
+     * コースで受講生を検索します。
+     *
+     * @param course コース名
+     * @return コースに一致する受講生リスト
+     */
+    List<Student> searchByCourse(String course);
+
+    List<Student> searchByAddress(String address);
+
+    List<Student> searchByFurigana(String furigana);
+
+    List<Student> searchByNickName(String nickName);
+
+    List<Student> searchByAge(int age);
+
+    @Select("SELECT * FROM students WHERE is_deleted = true")
+    List<Student> searchDeletedStudents();
+
+    List<StudentCourse> findByStatus(String status);
+
 }

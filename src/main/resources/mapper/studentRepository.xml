@@ -27,7 +27,7 @@
     <insert id="registerStudentCourse" parameterType="raisetech.StudentManagement.data.StudentCourse"
             useGeneratedKeys="true" keyProperty="id">
         INSERT INTO students_courses ( student_id, course, enrollment_start_date, enrollment_end_date )
-        VALUES ( #{studentId}, #{course}, #{enrollmentStartDate}, #{enrollmentEndDate} )
+        VALUES ( #{studentId}, #{course}, #{enrollmentStartDate}, #{enrollmentEndDate} , #{status})
     </insert>
     <!--受講生の更新-->
     <update id="updateStudent" parameterType="raisetech.StudentManagement.data.Student">
@@ -43,6 +43,22 @@
     <!-- 受講生IDに紐づく受講生コース情報を検索 -->
     <select id="findCoursesByStudentId" parameterType="int" resultType="raisetech.StudentManagement.data.StudentCourse">
         SELECT * FROM students_courses WHERE student_id = #{studentId}
+    </select>
+
+    <!-- 名前で受講生を検索 -->
+    <select id="findByName" parameterType="String" resultType="raisetech.StudentManagement.data.Student">
+        SELECT * FROM students WHERE name LIKE CONCAT('%', #{name}, '%')
+    </select>
+
+    <!-- コースで受講生を検索 -->
+    <select id="findByCourse" parameterType="String" resultType="raisetech.StudentManagement.data.Student">
+        SELECT * FROM students_courses sc
+        JOIN students s ON s.id = sc.student_id
+        WHERE sc.course LIKE CONCAT('%', #{course}, '%')
+    </select>
+    <select id="findByStatus" parameterType="String"
+            resultType="raisetech.StudentManagement.data.StudentCourse">
+        SELECT * FROM students_courses WHERE status = #{status}
     </select>
 
 </mapper>
